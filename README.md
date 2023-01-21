@@ -55,6 +55,23 @@ cosign sign-blob \
 
 ## Verify checksum files by Cosign
 
+You can verify a checksum file by Cosign.
+
+```sh
+COSIGN_EXPERIMENTAL=1 cosign verify-blob \
+  --signature https://github.com/suzuki-shunsuke/example-sigstore-cosign/releases/download/v0.1.0-5/checksums.txt.sig \
+  --certificate https://github.com/suzuki-shunsuke/example-sigstore-cosign/releases/download/v0.1.0-5/checksums.txt.pem \
+  --certificate-github-workflow-repository suzuki-shunsuke/example-sigstore-cosign \
+  --certificate-oidc-issuer https://token.actions.githubusercontent.com \
+  checksums.txt
+```
+
+```sh
+sha256sum --ignore-missing -c checksums.txt
+```
+
+## Advanced: Separate GitHub Actions jobs for least privilege
+
 ## Sign checksum files by GoReleaser
 
 
