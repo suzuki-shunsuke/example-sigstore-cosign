@@ -1,0 +1,4 @@
+dist
+checksums.txt
+*.sig
+*.pem
