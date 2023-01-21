@@ -21,7 +21,8 @@ jobs:
       - name: Build
         run: go build -o dist/hello_linux_amd64 ./cmd/hello
       - name: Create checksums.txt
-        run: sha256sum dist/hello_linux_amd64 > checksums.txt
+        run: sha256sum hello_linux_amd64 > checksums.txt
+        working-directory: dist
       - name: Sign checksums.txt by Cosign
         run: |
           cosign sign-blob \
@@ -29,10 +30,12 @@ jobs:
             --output-signature checksums.txt.sig \
             --oidc-provider github \
             checksums.txt
+        working-directory: dist
         env:
           COSIGN_EXPERIMENTAL: "1"
       - name: Create GitHub Release and upload files
         run: gh release create "${REF#refs/tags/}" checksums.txt checksums.txt.sig checksums.txt.pem hello_linux_amd64
+        working-directory: dist
         env:
           REF: ${{ github.ref }}
           GITHUB_TOKEN: ${{ github.token }}
