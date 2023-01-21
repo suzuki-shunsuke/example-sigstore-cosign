@@ -2,6 +2,8 @@
 
 Example to sign and verify artifacts with [Sigstore](https://sigstore.dev/)'s [Cosign](https://docs.sigstore.dev/cosign/overview)
 
+**:warning: This repository is still under development.**
+
 ## What's this?
 
 In this repository I show how to sign artifacts and verify them by Cosign.
